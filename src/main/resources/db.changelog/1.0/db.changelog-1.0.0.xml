@@ -30,4 +30,20 @@
         <rollback>DROP TABLE Provider</rollback>
     </changeSet>
 
+    <changeSet id="3" author="Anton Shtabnoy">
+        <comment>Change column providerid</comment>
+        <sql>ALTER TABLE `odin`.`Provider`
+            CHANGE COLUMN `providerid` `id` INT(11) NOT NULL AUTO_INCREMENT
+        </sql>
+        <rollback>ALTER TABLE `odin`.`Provider` CHANGE COLUMN `id` `providerid` INT(11) NOT NULL AUTO_INCREMENT</rollback>
+    </changeSet>
+
+    <changeSet id="4" author="Anton Shtabnoy">
+        <comment>Add column providerid</comment>
+        <sql>
+            ALTER TABLE `odin`.`Provider` ADD COLUMN `providerid` INT NOT NULL
+        </sql>
+        <rollback>ALTER TABLE odin`.`Provider` DROP `providerid`</rollback>
+    </changeSet>
+
 </databaseChangeLog>

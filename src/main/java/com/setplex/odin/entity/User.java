@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 public class User extends AbstractEntity {
 
+    private String login;
     private String password;
     private String firstName;
     private String lastName;

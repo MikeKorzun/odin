@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ProviderRepo extends JpaRepository<Provider, Integer> {
 
     @Query("SELECT p FROM Provider p WHERE p.id = ?1")
-    Provider findOneById(int id);
+    Provider findOneById(int providerId);
 
     @Query("SELECT p FROM Provider p")
     List<Provider> findAll();

@@ -7,7 +7,6 @@ import lombok.Setter;
 @Setter
 public class CreateProviderRequest {
 
-    private int id;
     private int providerId;
     private String address;
 }

@@ -1,11 +1,11 @@
-package com.setplex.odin.service;
+package com.setplex.odin.provider;
 
 import com.setplex.odin.entity.Provider;
-import com.setplex.odin.entity.ProviderStatus;
+import com.setplex.odin.entity.User;
 import com.setplex.odin.entity.dto.ChangeProviderStatusRequest;
 import com.setplex.odin.entity.dto.CreateProviderRequest;
 import com.setplex.odin.entity.dto.UpdateProviderRequest;
-import com.setplex.odin.repository.ProviderRepo;
+import com.setplex.odin.provider.dto.ProviderStatus;
 import com.setplex.odin.util.ApplicationSettings;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +17,7 @@ import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import static com.setplex.odin.controller.exception.ExceptionUtils.getDataNotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -88,12 +89,17 @@ public class ProviderService {
         return providerRepo.save(providerFromRepo);
     }
 
+    public void deleteProvider(int providerId){
+        Provider providerFromRepo = providerRepo.findOneById(providerId);
+        checkIfFound(providerId, providerFromRepo);
+        providerRepo.updateDeleted(providerId);
+    }
 
-
-//    public void deleteProvider(int providerId){
-//        providerRepo.delete(providerId);
-//    }
-
+    private static void checkIfFound(int userId, Provider provider) {
+        if (provider == null) {
+            throw getDataNotFoundException(User.class, userId);
+        }
+    }
 
     private static Provider createWithRequest(CreateProviderRequest userRequest) {
         Provider provider = new Provider();

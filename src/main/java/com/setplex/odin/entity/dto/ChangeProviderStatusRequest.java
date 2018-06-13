@@ -1,6 +1,6 @@
 package com.setplex.odin.entity.dto;
 
-import com.setplex.odin.entity.ProviderStatus;
+import com.setplex.odin.provider.dto.ProviderStatus;
 import lombok.Getter;
 import lombok.Setter;
 

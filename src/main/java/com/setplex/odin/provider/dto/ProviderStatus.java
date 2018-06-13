@@ -1,4 +1,4 @@
-package com.setplex.odin.entity;
+package com.setplex.odin.provider.dto;
 
 public enum ProviderStatus {
     ENABLED,

@@ -1,4 +1,4 @@
-package com.setplex.odin.entity.dto;
+package com.setplex.odin.provider.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

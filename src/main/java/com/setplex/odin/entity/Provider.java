@@ -1,5 +1,6 @@
 package com.setplex.odin.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -22,4 +23,6 @@ public class Provider extends AbstractEntity {
 
     private boolean status;
 
+    @JsonIgnore
+    private int deleted;
 }

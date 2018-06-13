@@ -7,12 +7,12 @@
 
     <changeSet id="1" author="Anton Shtabnoy">
         <comment>Create table 'User'</comment>
-        <sql>CREATE TABLE `User` (
-            `userid` int(11) NOT NULL AUTO_INCREMENT,
-            `firstname` varchar(64) NOT NULL,
-            `lastname` varchar(64) NOT NULL,
-            `password` varchar(45) NOT NULL,
-            PRIMARY KEY (`userid`)
+        <sql>CREATE TABLE User (
+             userid int(11) NOT NULL AUTO_INCREMENT,
+             firstname varchar(64) NOT NULL,
+             lastname varchar(64) NOT NULL,
+             password varchar(45) NOT NULL,
+             PRIMARY KEY (userid)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         </sql>
         <rollback>DROP TABLE User</rollback>
@@ -20,11 +20,11 @@
 
     <changeSet id="2" author="Anton Shtabnoy">
         <comment>Create table 'Provider'</comment>
-        <sql>CREATE TABLE `Provider` (
-            `providerid` int(11) NOT NULL,
-            `address` varchar(64) NOT NULL,
-            `status` tinyint(1) DEFAULT '0',
-            PRIMARY KEY (`providerid`)
+        <sql>CREATE TABLE Provider (
+             providerid int(11) NOT NULL,
+             address varchar(64) NOT NULL,
+             status tinyint(1) DEFAULT '0',
+            PRIMARY KEY (providerid)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         </sql>
         <rollback>DROP TABLE Provider</rollback>
@@ -32,18 +32,27 @@
 
     <changeSet id="3" author="Anton Shtabnoy">
         <comment>Change column providerid</comment>
-        <sql>ALTER TABLE `odin`.`Provider`
-            CHANGE COLUMN `providerid` `id` INT(11) NOT NULL AUTO_INCREMENT
+        <sql>ALTER TABLE Provider
+            CHANGE COLUMN providerid id INT(11) NOT NULL AUTO_INCREMENT
         </sql>
-        <rollback>ALTER TABLE `odin`.`Provider` CHANGE COLUMN `id` `providerid` INT(11) NOT NULL AUTO_INCREMENT</rollback>
+        <rollback>ALTER TABLE Provider CHANGE COLUMN id providerid INT(11) NOT NULL AUTO_INCREMENT</rollback>
     </changeSet>
 
     <changeSet id="4" author="Anton Shtabnoy">
         <comment>Add column providerid</comment>
         <sql>
-            ALTER TABLE `odin`.`Provider` ADD COLUMN `providerid` INT NOT NULL
+            ALTER TABLE Provider ADD COLUMN providerid INT NOT NULL
         </sql>
-        <rollback>ALTER TABLE odin`.`Provider` DROP `providerid`</rollback>
+        <rollback>ALTER TABLE Provider DROP providerid</rollback>
     </changeSet>
+
+    <changeSet id="5" author="Anton Shtabnoy">
+        <comment>Add column deleted</comment>
+        <sql>
+            ALTER TABLE Provider ADD COLUMN providerid INT NOT NULL
+        </sql>
+        <rollback>ALTER TABLE Provider DROP providerid</rollback>
+    </changeSet>
+
 
 </databaseChangeLog>

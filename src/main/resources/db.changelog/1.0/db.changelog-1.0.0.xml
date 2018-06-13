@@ -49,10 +49,10 @@
     <changeSet id="5" author="Anton Shtabnoy">
         <comment>Add column deleted</comment>
         <sql>
-            ALTER TABLE Provider ADD COLUMN providerid INT NOT NULL
+            ALTER TABLE Provider
+            ADD COLUMN deleted SMALLINT(4) NULL DEFAULT '0'
         </sql>
-        <rollback>ALTER TABLE Provider DROP providerid</rollback>
+        <rollback>ALTER TABLE Provider DROP deleted</rollback>
     </changeSet>
-
 
 </databaseChangeLog>

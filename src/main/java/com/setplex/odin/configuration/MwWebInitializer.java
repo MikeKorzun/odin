@@ -1,3 +1,4 @@
+/*
 package com.setplex.odin.configuration;
 
 
@@ -31,3 +32,4 @@ public class MwWebInitializer extends AbstractAnnotationConfigDispatcherServletI
         registration.setMultipartConfig(new MultipartConfigElement("", 2097152, 2306868, 0));
     }
 }
+*/

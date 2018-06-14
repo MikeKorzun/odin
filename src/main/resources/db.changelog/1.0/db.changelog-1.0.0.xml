@@ -55,4 +55,13 @@
         <rollback>ALTER TABLE Provider DROP deleted</rollback>
     </changeSet>
 
+    <changeSet id="6" author="Mike Korzun">
+        <comment>Add column Login</comment>
+        <sql>
+            ALTER TABLE User ADD COLUMN login varchar(50) NOT NULL
+        </sql>
+        <rollback>ALTER TABLE User DROP login</rollback>
+    </changeSet>
+
+
 </databaseChangeLog>

@@ -1,4 +1,4 @@
-package com.setplex.odin.configuration;
+/*package com.setplex.odin.configuration;
 
 import ch.qos.logback.classic.LoggerContext;
 import javax.servlet.ServletContextEvent;
@@ -19,4 +19,4 @@ public class MwContextListener implements ServletContextListener {
         // To avoid memory leak. See logback documentation for details
         ((LoggerContext) LoggerFactory.getILoggerFactory()).stop();
     }
-}
+}*/

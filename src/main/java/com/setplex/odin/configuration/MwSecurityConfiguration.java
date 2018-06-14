@@ -1,3 +1,4 @@
+/*
 package com.setplex.odin.configuration;
 
 import lombok.RequiredArgsConstructor;
@@ -40,9 +41,11 @@ public class MwSecurityConfiguration {
         return new DefaultHttpFirewall();
     }
 
-    /**
+    */
+/**
      * RunAsManager configuration to execute API calls annotated with @PreAuthorize as user with pre-populated SecurityContext
-     */
+     *//*
+
     @Configuration
     @EnableGlobalMethodSecurity(prePostEnabled = true)
     public static class MwGlobalMethodSecurityConfiguration extends GlobalMethodSecurityConfiguration {
@@ -57,9 +60,11 @@ public class MwSecurityConfiguration {
         }
     }
 
-    /**
+    */
+/**
      * Security for Portal application. In-memory BASIC auth.
-     */
+     *//*
+
     @Configuration
     @Order(2)
     public static class ApiProviderSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
@@ -101,10 +106,12 @@ public class MwSecurityConfiguration {
 //        }
     }
 
-    /**
+    */
+/**
      * Main configuration chain. Uses DB as source of authentication data.
      * Should be last Configurer adapter in chain with lowest precedence.
-     */
+     *//*
+
     @Configuration
     @Order
     @RequiredArgsConstructor
@@ -164,3 +171,4 @@ public class MwSecurityConfiguration {
         }
     }
 }
+*/

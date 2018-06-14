@@ -1,3 +1,4 @@
+/*
 package com.setplex.odin.configuration;
 
 import java.util.List;
@@ -35,3 +36,4 @@ public class MwWebConfiguration extends WebMvcConfigurerAdapter {
         this.jacksonConverter = jacksonConverter;
     }
 }
+*/

@@ -6,22 +6,21 @@ import com.setplex.odin.entity.dto.ChangeProviderStatusRequest;
 import com.setplex.odin.entity.dto.CreateProviderRequest;
 import com.setplex.odin.entity.dto.UpdateProviderRequest;
 import com.setplex.odin.provider.dto.ProviderStatus;
-import com.setplex.odin.util.ApplicationSettings;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.support.BasicAuthorizationInterceptor;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import static com.setplex.odin.controller.exception.ExceptionUtils.getDataNotFoundException;
 
 @Service
 @RequiredArgsConstructor
+@PropertySource("classpath:provider.properties")
 @Slf4j
 public class ProviderService {
 
@@ -71,20 +70,20 @@ public class ProviderService {
         if (providerFromRepo == null) {
             throw new RuntimeException("Provider not found");
         }
-        if(status == null){
+        if (status == null){
             throw new RuntimeException("Unknown provider status");
         }
 
         switch (status) {
             case ENABLED: {
                 providerFromRepo.setStatus(true);
-                updatedStatus = String.format(applicationSettings.getProviderStatus(), status);
+                //updatedStatus = String.format(applicationSettings.getProviderStatus(), status);
                 break;
             }
 
             case DISABLED: {
                 providerFromRepo.setStatus(false);
-                updatedStatus = String.format(applicationSettings.getProviderStatus(), status);
+                //updatedStatus = String.format(applicationSettings.getProviderStatus(), status);
                 break;
             }
 
@@ -96,7 +95,7 @@ public class ProviderService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(updatedStatus, headers);
-        String url = String.format("%s/nora/api/odin/provider", providerFromRepo.getAddress());
+        String url = String.format("odin.provider.url", providerFromRepo.getAddress());
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, String.class);
 

@@ -25,7 +25,6 @@ import static com.setplex.odin.controller.exception.ExceptionUtils.getDataNotFou
 @Slf4j
 public class ProviderService {
 
-    private final ApplicationSettings applicationSettings;
     private final ProviderRepo providerRepo;
     private final RestTemplate restTemplate;
 
@@ -82,8 +81,7 @@ public class ProviderService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(updatedStatus, headers);
         String url = String.format("%s/nora/api/odin/provider", providerFromRepo.getAddress());
-        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(applicationSettings.getOdinToken(), applicationSettings.getOdinToken()));
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, String.class);
 
         responseEntity.getStatusCode();

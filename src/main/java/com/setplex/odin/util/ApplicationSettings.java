@@ -1,3 +1,4 @@
+/*
 package com.setplex.odin.util;
 
 import lombok.Getter;
@@ -12,3 +13,4 @@ public class ApplicationSettings {
     @Value("${ODIN_TOKEN:changeme}")
     private String odinToken;
 }
+*/

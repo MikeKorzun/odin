@@ -6,11 +6,15 @@ import com.setplex.odin.entity.dto.ChangeProviderStatusRequest;
 import com.setplex.odin.entity.dto.CreateProviderRequest;
 import com.setplex.odin.entity.dto.UpdateProviderRequest;
 import com.setplex.odin.provider.dto.ProviderStatus;
+import java.nio.charset.Charset;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,6 +29,8 @@ public class ProviderService {
 
     private final ProviderRepo providerRepo;
     private final RestTemplate restTemplate;
+    @Value("${odin.provider.url}")
+    private String providerURL;
 
     public Provider getProviderById(int providerId){
         return providerRepo.findOneById(providerId);
@@ -91,10 +97,10 @@ public class ProviderService {
             }
         }
 
-        //HttpHeaders headers = new HttpHeaders();
-        //headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<ProviderStatus> entity = new HttpEntity<>(status);
-        String url = String.format("odin.provider.url", providerFromRepo.getAddress());
+
+        HttpEntity<String> entity = new HttpEntity<>(status.name(), createHeaders(providerFromRepo.getToken()));
+        String url = String.format(providerURL, providerFromRepo.getAddress());
+
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, String.class);
 
@@ -109,6 +115,16 @@ public class ProviderService {
         Provider providerFromRepo = providerRepo.findOneById(providerId);
         checkIfFound(providerId, providerFromRepo);
         providerRepo.updateDeleted(providerId);
+    }
+
+    private HttpHeaders createHeaders(String token){
+        return new HttpHeaders() {{
+            String auth = token + ":" + token;
+            byte[] encodedAuth = Base64.encodeBase64(
+                    auth.getBytes(Charset.forName("US-ASCII")) );
+            String authHeader = "Basic " + new String( encodedAuth );
+            set( "Authorization", authHeader );
+        }};
     }
 
     private static void checkIfFound(int userId, Provider provider) {

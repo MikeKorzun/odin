@@ -23,6 +23,9 @@ public class Provider extends AbstractEntity {
 
     private boolean status;
 
+    @Column(length = 32, nullable = false)
+    private String token;
+
     @JsonIgnore
     private int deleted;
 }

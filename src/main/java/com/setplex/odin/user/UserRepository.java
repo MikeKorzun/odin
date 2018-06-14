@@ -1,4 +1,4 @@
-package com.setplex.odin.repository;
+package com.setplex.odin.user;
 
 import com.setplex.odin.entity.User;
 import org.springframework.data.jpa.repository.Query;

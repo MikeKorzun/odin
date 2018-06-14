@@ -1,10 +1,9 @@
-package com.setplex.odin.facade;
+package com.setplex.odin.user;
 
 import com.setplex.odin.entity.User;
-import com.setplex.odin.entity.dto.UserCreateRequest;
-import com.setplex.odin.entity.dto.UserDTO;
-import com.setplex.odin.entity.dto.UserUpdateRequest;
-import com.setplex.odin.service.UserService;
+import com.setplex.odin.user.dto.UserCreateRequest;
+import com.setplex.odin.user.dto.UserDTO;
+import com.setplex.odin.user.dto.UserUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

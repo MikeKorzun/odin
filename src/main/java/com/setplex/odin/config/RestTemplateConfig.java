@@ -1,5 +1,6 @@
 package com.setplex.odin.config;
 
+import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +20,7 @@ public class RestTemplateConfig {
     @Bean
     public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory());
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+         restTemplate.setMessageConverters(Collections.singletonList(new MappingJackson2HttpMessageConverter()));
         return restTemplate;
     }
 

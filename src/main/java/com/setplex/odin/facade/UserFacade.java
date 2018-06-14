@@ -41,15 +41,14 @@ public class UserFacade {
         return transform(userService.getUserById(userId));
     }
 
-    public UserDTO getUserByLogin(String login) {
+    /*public UserDTO getUserByLogin(String login) {
         return transform(userService.getUserByLogin(login));
-    }
+    }*/
 
     private static UserDTO transform(User user) {
         return UserDTO.builder()
                 .id(user.getId())
                 .login(user.getLogin())
-                .password(user.getPassword())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .build();
@@ -57,7 +56,6 @@ public class UserFacade {
 
     private static UserCreateRequest transformToUserCreateRequest(UserDTO userDTO) {
         UserCreateRequest request = new UserCreateRequest();
-        request.setId(userDTO.getId());
         request.setFirstname(userDTO.getFirstName());
         request.setLastname(userDTO.getLastName());
         request.setPassword(userDTO.getPassword());

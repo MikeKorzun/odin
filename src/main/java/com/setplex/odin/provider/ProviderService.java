@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,7 @@ public class ProviderService {
         String updatedStatus = null;
 
 
-        if (providerFromRepo == null || status == null) {
+        if (providerFromRepo == null) {
             throw new RuntimeException("Provider not found");
         }
 
@@ -83,7 +84,9 @@ public class ProviderService {
         String url = String.format("%s/nora/api/odin/provider", providerFromRepo.getAddress());
         restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(applicationSettings.getOdinToken(), applicationSettings.getOdinToken()));
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-        restTemplate.postForObject(url, entity, String.class);
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, String.class);
+
+        responseEntity.getStatusCode();
 
 
         return providerRepo.save(providerFromRepo);

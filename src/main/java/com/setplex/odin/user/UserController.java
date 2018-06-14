@@ -1,8 +1,7 @@
-package com.setplex.odin.controller;
+package com.setplex.odin.user;
 
 import com.setplex.odin.controller.exception.InvalidDataException;
-import com.setplex.odin.entity.dto.UserDTO;
-import com.setplex.odin.facade.UserFacade;
+import com.setplex.odin.user.dto.UserDTO;
 import com.setplex.odin.controller.response.ResponseEntityHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

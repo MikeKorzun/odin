@@ -1,4 +1,4 @@
-package com.setplex.odin.entity.dto;
+package com.setplex.odin.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;

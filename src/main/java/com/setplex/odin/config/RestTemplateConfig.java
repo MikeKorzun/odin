@@ -11,6 +11,9 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 @Configuration
 @RequiredArgsConstructor
 public class RestTemplateConfig {
@@ -20,8 +23,8 @@ public class RestTemplateConfig {
     @Bean
     public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory());
-        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(applicationSettings.getOdinToken(), applicationSettings.getOdinToken()));
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        //restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(applicationSettings.getOdinToken(), applicationSettings.getOdinToken()));
+        restTemplate.setMessageConverters(Collections.singletonList(new MappingJackson2HttpMessageConverter()));
         return restTemplate;
     }
 

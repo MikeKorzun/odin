@@ -15,6 +15,18 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    public List<User> getAllUsers() {
+        return (List<User>) userRepository.findAll();
+    }
+
+    public User getUserById(int userId) {
+        return userRepository.findOneById(userId);
+    }
+
+    public User getUserByLogin(String login) {
+        return userRepository.findOneByLogin(login);
+    }
+
     public User createUser(UserCreateRequest createRequest) {
         User user = createWithRequest(createRequest);
         return userRepository.save(user);
@@ -45,18 +57,6 @@ public class UserService {
 
     public void deleteUser(int userId) {
         userRepository.deleteById(userId);
-    }
-
-    public List<User> getAllUsers() {
-        return (List<User>) userRepository.findAll();
-    }
-
-    public User getUserById(int userId) {
-        return userRepository.findOneById(userId);
-    }
-
-    public User getUserByLogin(String login) {
-        return userRepository.findOneByLogin(login);
     }
 
 }

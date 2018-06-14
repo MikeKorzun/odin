@@ -17,6 +17,16 @@ public class UserFacade {
 
     private final UserService userService;
 
+    public List<UserDTO> getAllUsers() {
+        return userService.getAllUsers().stream()
+                .map(UserFacade::transform)
+                .collect(toList());
+    }
+
+    public UserDTO getUserById(int userId) {
+        return transform(userService.getUserById(userId));
+    }
+
     public UserDTO createUser(UserDTO userDTO) {
         UserCreateRequest user = transformToUserCreateRequest(userDTO);
         return transform(userService.createUser(user));
@@ -29,20 +39,6 @@ public class UserFacade {
     public void deleteUser(int userId) {
         userService.deleteUser(userId);
     }
-
-    public List<UserDTO> getAllUsers() {
-        return userService.getAllUsers().stream()
-                .map(UserFacade::transform)
-                .collect(toList());
-    }
-
-    public UserDTO getUserById(int userId) {
-        return transform(userService.getUserById(userId));
-    }
-
-    /*public UserDTO getUserByLogin(String login) {
-        return transform(userService.getUserByLogin(login));
-    }*/
 
     private static UserDTO transform(User user) {
         return UserDTO.builder()

@@ -5,6 +5,7 @@ import com.setplex.odin.entity.User;
 import com.setplex.odin.entity.dto.ChangeProviderStatusRequest;
 import com.setplex.odin.entity.dto.CreateProviderRequest;
 import com.setplex.odin.entity.dto.UpdateProviderRequest;
+import com.setplex.odin.provider.dto.NoraRequest;
 import com.setplex.odin.provider.dto.ProviderStatus;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -69,8 +70,6 @@ public class ProviderService {
         int providerId = providerStatusRequest.getId();
         ProviderStatus status = providerStatusRequest.getStatus();
         Provider providerFromRepo = providerRepo.findOneById(providerId);
-        //String updatedStatus = null;
-
 
         if (providerFromRepo == null) {
             throw new RuntimeException("Provider not found");
@@ -82,13 +81,11 @@ public class ProviderService {
         switch (status) {
             case ENABLED: {
                 providerFromRepo.setStatus(true);
-                //updatedStatus = String.format(applicationSettings.getProviderStatus(), status);
                 break;
             }
 
             case DISABLED: {
                 providerFromRepo.setStatus(false);
-                //updatedStatus = String.format(applicationSettings.getProviderStatus(), status);
                 break;
             }
 
@@ -97,11 +94,9 @@ public class ProviderService {
             }
         }
 
-
-        HttpEntity<String> entity = new HttpEntity<>(status.name(), createHeaders(providerFromRepo.getToken()));
+        NoraRequest noraRequest = new NoraRequest(status);
+        HttpEntity<NoraRequest> entity = new HttpEntity<>(noraRequest, createHeaders(providerFromRepo.getToken()));
         String url = String.format(providerURL, providerFromRepo.getAddress());
-
-
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, String.class);
 
         if(responseEntity.getStatusCode() != HttpStatus.OK){

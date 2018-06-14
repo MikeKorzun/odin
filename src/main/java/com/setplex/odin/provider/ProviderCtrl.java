@@ -50,7 +50,6 @@ public class ProviderCtrl {
 
     @PatchMapping("/{providerId}")
     public ResponseEntity<Void> updateProviderStatus(@PathVariable int providerId, @RequestBody ActionRequest actionRequest) {
-        System.out.println("sdfg");
         providerFacade.updateStatus(providerId, actionRequest.getStatus());
         return ResponseEntityHelper.updateResponseEntity();
     }

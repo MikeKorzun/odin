@@ -63,5 +63,20 @@
         <rollback>ALTER TABLE User DROP login</rollback>
     </changeSet>
 
+    <changeSet id="7" author="Anton Shtabnoy">
+        <comment>Add column token</comment>
+        <sql>
+            ALTER TABLE Provider ADD COLUMN token varchar(64) NOT NULL
+        </sql>
+        <rollback>ALTER TABLE Provider DROP token</rollback>
+    </changeSet>
 
+    <changeSet id="8" author="Anton Shtabnoy">
+        <comment>Change column status</comment>
+        <sql>ALTER TABLE Provider
+            CHANGE COLUMN status status VARCHAR(32) NULL DEFAULT 'ENABLED'
+        </sql>
+        <rollback>ALTER TABLE Provider
+            CHANGE COLUMN status status TINYINT(1) NULL DEFAULT '0'</rollback>
+    </changeSet>
 </databaseChangeLog>

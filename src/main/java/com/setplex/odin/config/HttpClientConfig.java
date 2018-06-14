@@ -1,6 +1,5 @@
 package com.setplex.odin.config;
 
-import com.setplex.odin.util.ApplicationSettings;
 import java.util.concurrent.TimeUnit;
 import org.apache.http.HeaderElement;
 import org.apache.http.HeaderElementIterator;
@@ -96,10 +95,5 @@ public class HttpClientConfig {
                 }
             }
         };
-    }
-
-    @Bean
-    public ApplicationSettings applicationSettings(){
-       return new ApplicationSettings();
     }
 }

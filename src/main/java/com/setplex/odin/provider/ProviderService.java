@@ -41,11 +41,24 @@ public class ProviderService {
           return providerRepo.save(provider);
     }
 
+    private static Provider createWithRequest(CreateProviderRequest userRequest) {
+        Provider provider = new Provider();
+        provider.setAddress(userRequest.getAddress());
+        provider.setProviderId(userRequest.getProviderId());
+        return provider;
+    }
+
+
     public Provider updateProvider(UpdateProviderRequest providerRequest) {
         int providerId = providerRequest.getId();
         Provider providerFromRepo = providerRepo.findOneById(providerId);
         updateWithRequest(providerRequest, providerFromRepo);
         return providerRepo.save(providerFromRepo);
+    }
+
+    private static Provider updateWithRequest(UpdateProviderRequest userRequest, Provider provider) {
+        provider.setAddress(userRequest.getAddress());
+        return provider;
     }
 
     public Provider updateProviderStatus(ChangeProviderStatusRequest providerStatusRequest){
@@ -57,6 +70,9 @@ public class ProviderService {
 
         if (providerFromRepo == null) {
             throw new RuntimeException("Provider not found");
+        }
+        if(status == null){
+            throw new RuntimeException("Unknown provider status");
         }
 
         switch (status) {
@@ -86,7 +102,6 @@ public class ProviderService {
 
         responseEntity.getStatusCode();
 
-
         return providerRepo.save(providerFromRepo);
     }
 
@@ -100,17 +115,5 @@ public class ProviderService {
         if (provider == null) {
             throw getDataNotFoundException(User.class, userId);
         }
-    }
-
-    private static Provider createWithRequest(CreateProviderRequest userRequest) {
-        Provider provider = new Provider();
-        provider.setAddress(userRequest.getAddress());
-        provider.setProviderId(userRequest.getProviderId());
-        return provider;
-    }
-
-    private static Provider updateWithRequest(UpdateProviderRequest userRequest, Provider provider) {
-        provider.setAddress(userRequest.getAddress());
-        return provider;
     }
 }

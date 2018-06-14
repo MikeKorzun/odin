@@ -41,7 +41,7 @@ public class ProviderCtrl {
     }
 
     @PutMapping("/{providerId}")
-    public ResponseEntity<ProviderDto> updateUser(@PathVariable int providerId, @RequestBody ProviderDto dto) {
+    public ResponseEntity<ProviderDto> updateProvider(@PathVariable int providerId, @RequestBody ProviderDto dto) {
         if(providerId != dto.getId()){
             throw new InvalidDataException("Id in path not equals Id in body.");
         }
